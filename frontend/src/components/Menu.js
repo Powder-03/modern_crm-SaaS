@@ -128,6 +128,14 @@ const Menu = () => {
           <>
             <li style={navItemStyle}>
               <Link 
+                to="/leads" 
+                style={{...linkStyle, ...(isActive('/leads') ? activeStyle : {})}}
+              >
+                Leads
+              </Link>
+            </li>
+            <li style={navItemStyle}>
+              <Link 
                 to="/my-account" 
                 style={{...linkStyle, ...(isActive('/my-account') ? activeStyle : {})}}
               >

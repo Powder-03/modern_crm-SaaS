@@ -30,7 +30,7 @@ class Lead(models.Model):
     
     
     company = models.CharField(max_length=255)
-    contact_person = models.CharField(max_length=255)
+    contact_person = models.CharField(max_length=255 , default='unknown')
     email = models.EmailField(max_length=255)
     phone = models.CharField(max_length=255)
     website = models.CharField(max_length=255, blank=True, null=True)

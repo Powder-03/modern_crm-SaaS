@@ -9,7 +9,10 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import MyAccount from './pages/MyAccount';
+import Leads from './pages/Leads';
 import ProtectedRoute from './components/ProtectedRoute';
+import { LeadsProvider } from './context/LeadsContext';
+import { ToastProvider } from './context/ToastContext';
 import './App.css';
 
 // Global styles for the app
@@ -27,30 +30,37 @@ const contentStyle = {
 function App() {
   return (
     <Router>
-      <div style={appStyle}>
-        <Menu />
-        <div style={contentStyle}>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+      <ToastProvider>
+        <div style={appStyle}>
+          <Menu />
+          <div style={contentStyle}>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
 
-            {/* Protected Routes */}
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/my-account" element={<MyAccount />} />
-            </Route>
-            
-            {/* Fallback for unmatched routes (optional) */}
-            <Route path="*" element={
-              <div style={{ textAlign: 'center', marginTop: '50px' }}>
-                <h1>404 - Page Not Found</h1>
-                <p>The page you are looking for does not exist.</p>
-              </div>
-            } />
-          </Routes>
+              {/* Protected Routes */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/my-account" element={<MyAccount />} />
+                <Route path="/leads" element={
+                  <LeadsProvider>
+                    <Leads />
+                  </LeadsProvider>
+                } />
+              </Route>
+              
+              {/* Fallback for unmatched routes (optional) */}
+              <Route path="*" element={
+                <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                  <h1>404 - Page Not Found</h1>
+                  <p>The page you are looking for does not exist.</p>
+                </div>
+              } />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </ToastProvider>
     </Router>
   );
 }
