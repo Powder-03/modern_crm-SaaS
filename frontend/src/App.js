@@ -10,27 +10,46 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import MyAccount from './pages/MyAccount';
 import ProtectedRoute from './components/ProtectedRoute';
-import './App.css'; // Assuming you have some basic styling
+import './App.css';
+
+// Global styles for the app
+const appStyle = {
+  minHeight: '100vh',
+  backgroundColor: '#f8f9fa',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif',
+};
+
+const contentStyle = {
+  padding: '20px',
+  marginTop: '0',
+};
 
 function App() {
   return (
     <Router>
-      <Menu />
-      <div className="container"> {/* Optional: for basic layout styling */}
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+      <div style={appStyle}>
+        <Menu />
+        <div style={contentStyle}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
 
-          {/* Protected Routes */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/my-account" element={<MyAccount />} />
-          </Route>
-          
-          {/* Fallback for unmatched routes (optional) */}
-          <Route path="*" element={<div>Page Not Found</div>} />
-        </Routes>
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/my-account" element={<MyAccount />} />
+            </Route>
+            
+            {/* Fallback for unmatched routes (optional) */}
+            <Route path="*" element={
+              <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <h1>404 - Page Not Found</h1>
+                <p>The page you are looking for does not exist.</p>
+              </div>
+            } />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
